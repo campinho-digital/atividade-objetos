@@ -1,7 +1,9 @@
-// Array para armazenar os produtos no carrinho
+const prompt = require('prompt-sync')({sigint:true});
+// Criei esse array para funcionar como armazenamento do carrinho
 let carrinho = [];
 
-// Função para adicionar um produto ao carrinho
+// SEGUNDA TELA - Função para adicionar um produto, preço e quantidade ao carrinho
+
 function adicionarProduto() {
     let nome = prompt("Informe o nome do produto:");
     let preco = parseFloat(prompt("Informe o preço do produto:"));
@@ -13,33 +15,33 @@ function adicionarProduto() {
     // Adiciona o produto ao carrinho
     carrinho.push({ nome, preco, quantidade, subtotal });
 
-    alert(`Produto "${nome}" adicionado ao carrinho.`);
+  console.log(`Produto: ${nome}, foi adicionado ao carrinho.`); 
+  console.log(`Valor por item: R$ ${preco} \n`);
 }
 
 // Função para exibir os itens do carrinho e o total da compra
 function exibirCarrinho() {
-    let mensagem = "Produtos no carrinho:\n\n";
+    let mensagem = "Produtos no carrinho:";
 
     // Itera sobre os produtos no carrinho
     carrinho.forEach(produto => {
         mensagem += `Nome: ${produto.nome}\n`;
         mensagem += `Preço unitário: R$ ${produto.preco.toFixed(2)}\n`;
-        mensagem += `Quantidade: ${produto.quantidade}\n`;
-        mensagem += `Subtotal: R$ ${produto.subtotal.toFixed(2)}\n\n`;
+        mensagem += `Subtotal: R$ ${produto.subtotal.toFixed(2)}\n`;
     });
 
-    // Calcula o valor total da compra
+    // Para calcular o valor total da compra
     let total = carrinho.reduce((acc, produto) => acc + produto.subtotal, 0);
 
-    mensagem += `Total da compra: R$ ${total.toFixed(2)}`;
+    mensagem += `Total da compra: R$ ${total.toFixed(2)}\n`;
 
-    alert(mensagem);
+    console.log(mensagem);
 }
 
-// Função principal para interação com o usuário
+//PRIMEIRA TELA - Função principal para interação com o usuário
 function main() {
     while (true) {
-        let opcao = prompt("Escolha uma opção:\n1 - Adicionar produto ao carrinho\n2 - Visualizar carrinho\n3 - Finalizar compra\n4 - Sair");
+        let opcao = prompt("Escolha uma opção:\n1 - Adicionar produto ao carrinho\n2 - Visualizar carrinho\n3 - Finalizar compra\n4 - Sair \n");
 
         switch (opcao) {
             case "1":
@@ -49,13 +51,13 @@ function main() {
                 exibirCarrinho();
                 break;
             case "3":
-                alert("Compra finalizada. Obrigado por comprar conosco!");
+                console.log ("Compra finalizada. Supermercados Abner agradece pela compra");
                 return;
             case "4":
-                alert("Sessão encerrada.");
+                console.log ("Operação Finalizada com sucesso.");
                 return;
             default:
-                alert("Opção inválida. Por favor, escolha uma opção válida.");
+                console.log ("Opção inválida. Por favor, escolha uma opção entre '1' e '4'.");
         }
     }
 }
